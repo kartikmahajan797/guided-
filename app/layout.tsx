@@ -16,9 +16,9 @@ const display = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Guided — Guided by experts. Ready for industry.",
+  title: "Guided — Finance, AI, Coding & Robotics classes for ages 8–12",
   description:
-    "Guided connects students with working industry professionals for mentorship, live projects and courses that prepare them for real work.",
+    "Live online Finance, AI, Development and Robotics classes for 8–12 year olds. Max 8 kids per class, taught by working engineers and finance professionals. Book a free trial.",
 };
 
 export default function RootLayout({
@@ -28,6 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${body.variable} ${display.variable} h-full`}>
+      <head>
+        {/* Scroll-reveal is progressive enhancement, never a gate on content:
+            with scripting off the elements render in their final state. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1 !important;transform:none !important}`}</style>
+        </noscript>
+      </head>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

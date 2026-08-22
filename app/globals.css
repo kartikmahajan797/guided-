@@ -4,45 +4,261 @@
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-display-face), ui-sans-serif, system-ui, sans-serif;
 
-  /* Text */
-  --color-ink: #0b1b33;
-  --color-ink-soft: #4a5a72;
-  --color-ink-muted: #7b8a9e;
+  /* ---------------------------------------------------------------- ink --
+   * Deep, slightly warm navy-black. Never pure #000 — pure black on a
+   * warm paper ground reads cheap at large type sizes.                     */
+  --color-ink: #0a1729;
+  --color-ink-soft: #4d5b70;
+  --color-ink-muted: #808ea1;
 
-  /* Deep navy surfaces */
-  --color-navy-950: #04162c;
-  --color-navy-900: #0a2140;
-  --color-navy-800: #123059;
-  --color-navy-700: #1c4478;
+  /* ------------------------------------------------------------ surfaces --
+   * `paper` is the page ground: a warm off-white, not #fff. This single
+   * change does more for perceived quality than any other token — pure
+   * white reads as "unstyled default", warm white reads as "designed".     */
+  --color-paper: #fcfbf9;
+  --color-mist: #f4f2ee;
+  --color-line: #e7e3dc;
+  --color-line-strong: #d8d3ca;
 
-  /* Accent */
+  /* Deep navy surfaces for the dark bands */
+  --color-navy-950: #050f1f;
+  --color-navy-900: #0a1c33;
+  --color-navy-800: #10294a;
+  --color-navy-700: #1a3d68;
+  --color-navy-600: #24548c;
+
+  /* ------------------------------------------------------- brand / teal --
+   * Primary accent. Deepened from the original so it holds its own as a
+   * solid fill, not just a 12% tint.                                       */
+  --color-brand-200: #99f6e4;
   --color-brand-300: #5eead4;
   --color-brand-400: #2dd4bf;
-  --color-brand-500: #14b8a6;
+  --color-brand-500: #0fb5a4;
   --color-brand-600: #0d9488;
+  --color-brand-700: #0f766e;
 
-  /* Neutrals */
-  --color-mist: #f3f6fb;
-  --color-line: #e6ecf4;
+  /* --------------------------------------------------- warm accent: sun --
+   * Amber. Owns Finance. Warm enough to signal "for children", desaturated
+   * enough at 600 to stay premium in text.                                 */
+  --color-sun-200: #fde68a;
+  --color-sun-300: #fcd34d;
+  --color-sun-400: #fbbf24;
+  --color-sun-500: #f0a021;
+  --color-sun-600: #c9791a;
 
-  --shadow-card: 0 1px 2px rgba(11, 27, 51, 0.04), 0 8px 24px -12px rgba(11, 27, 51, 0.12);
-  --shadow-float: 0 12px 40px -12px rgba(11, 27, 51, 0.22);
+  /* ------------------------------------------------- warm accent: coral --
+   * Owns Robotics and the "from the kids" voice. The high-energy note.     */
+  --color-coral-200: #fecdd3;
+  --color-coral-300: #fda4af;
+  --color-coral-400: #fb7185;
+  --color-coral-500: #ef4d69;
+  --color-coral-600: #c9304c;
+
+  /* ------------------------------------------------------------ shadows --
+   * Layered, low-alpha, warm-tinted. A single big soft shadow reads cheap;
+   * stacked shadows at increasing blur read like real elevation.           */
+  --shadow-xs: 0 1px 2px rgba(10, 23, 41, 0.05);
+  --shadow-card:
+    0 1px 2px rgba(10, 23, 41, 0.04),
+    0 4px 8px -2px rgba(10, 23, 41, 0.04),
+    0 12px 24px -8px rgba(10, 23, 41, 0.06);
+  --shadow-lift:
+    0 2px 4px rgba(10, 23, 41, 0.04),
+    0 8px 16px -4px rgba(10, 23, 41, 0.06),
+    0 24px 44px -12px rgba(10, 23, 41, 0.12);
+  --shadow-float:
+    0 4px 8px rgba(10, 23, 41, 0.05),
+    0 16px 32px -8px rgba(10, 23, 41, 0.09),
+    0 40px 72px -20px rgba(10, 23, 41, 0.18);
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Keeps sticky-header anchors from clipping section titles */
+    scroll-padding-top: 5.5rem;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   body {
-    @apply bg-white font-sans text-ink-soft antialiased;
+    @apply bg-paper font-sans text-ink-soft;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  /* Tabular figures everywhere a number is a claim — prices, stats, ratings.
+     Proportional digits make a stats row look ragged. */
+  .tnum,
+  dd,
+  time {
+    font-variant-numeric: tabular-nums;
   }
 
   ::selection {
-    @apply bg-ink text-white;
+    @apply bg-ink text-paper;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-500;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
+/* ------------------------------------------------------------- utilities -- */
+
 @utility heading {
-  @apply font-display font-bold tracking-[-0.03em] text-ink text-balance;
+  @apply font-display font-bold text-ink text-balance;
+  letter-spacing: -0.035em;
+}
+
+/* Hairline that fades at both ends — reads more considered than a flat rule */
+@utility rule-fade {
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    var(--color-line-strong) 15%,
+    var(--color-line-strong) 85%,
+    transparent
+  );
+}
+
+/* Very fine grain over dark panels. Stops large navy fills from looking
+   like flat dead ink and gives them a printed quality. */
+@utility grain {
+  position: relative;
+}
+@utility grain-layer {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+@utility card-lift {
+  transition:
+    transform 0.4s var(--ease-out-quint),
+    box-shadow 0.4s var(--ease-out-quint),
+    border-color 0.4s var(--ease-out-quint);
+}
+@utility card-lift-hover {
+  transform: translateY(-3px);
+}
+
+/* ============================================================================
+ * Motion
+ * Everything here is decorative and every one of them is disabled by the
+ * reduced-motion block above. Durations are long and easings are soft —
+ * fast, snappy motion reads as "app", slow drift reads as "considered".
+ * ========================================================================== */
+
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+@utility animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+/* Slow vertical drift for the hero's floating proof cards. */
+@keyframes float-y {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -7px, 0); }
+}
+@utility animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+@utility animate-float-slow {
+  animation: float-y 8.5s ease-in-out infinite;
+}
+
+/* The hero's two colour washes breathe in opposite phase, so the ground is
+   never perfectly still but never obviously animated either. */
+@keyframes aurora {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.85; }
+  50%      { transform: translate3d(3%, 4%, 0) scale(1.12); opacity: 1; }
+}
+@utility animate-aurora {
+  animation: aurora 16s ease-in-out infinite;
+}
+@utility animate-aurora-alt {
+  animation: aurora 20s ease-in-out infinite reverse;
+}
+
+/* Robot driving its line-follower track. */
+@keyframes drive {
+  0%, 100% { transform: translate3d(-9px, 0, 0); }
+  50%      { transform: translate3d(9px, 0, 0); }
+}
+@utility animate-drive {
+  animation: drive 4.5s ease-in-out infinite;
+}
+
+/* Sensor / status blips. */
+@keyframes blip {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(0.82); }
+}
+@utility animate-blip {
+  animation: blip 1.8s ease-in-out infinite;
+}
+
+/* Neural-net nodes lighting in sequence. */
+@keyframes node-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; }
+}
+@utility animate-node {
+  animation: node-pulse 2.6s ease-in-out infinite;
+}
+
+/* Data flowing along the dashed connectors in the AI scene. */
+@keyframes flow {
+  to { stroke-dashoffset: -18; }
+}
+@utility animate-flow {
+  animation: flow 1.1s linear infinite;
+}
+
+/* Typing caret in the code scene. */
+@keyframes caret {
+  0%, 45%   { opacity: 1; }
+  55%, 100% { opacity: 0; }
+}
+@utility animate-caret {
+  animation: caret 1.1s steps(1) infinite;
+}
+
+/* Budget bars filling. Runs once on view via the `in-view` class. */
+@keyframes grow-x {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@utility animate-grow-x {
+  transform-origin: left center;
+  animation: grow-x 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Subtle sheen sweeping a dark panel — reads as glass, not as a loading bar. */
+@keyframes sheen {
+  0%   { transform: translateX(-120%) skewX(-18deg); }
+  60%, 100% { transform: translateX(220%) skewX(-18deg); }
+}
+@utility animate-sheen {
+  animation: sheen 7s ease-in-out infinite;
+}
+
+/* Participant tiles popping in one after another when the hero mounts. */
+@keyframes tile-in {
+  from { opacity: 0; transform: scale(0.9) translate3d(0, 6px, 0); }
+  to   { opacity: 1; transform: none; }
 }

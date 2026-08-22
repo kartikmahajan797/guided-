@@ -142,3 +142,99 @@ export const Logo = (p: IconProps) => (
     />
   </svg>
 );
+
+/* ------------------------- kids-programme additions ------------------------ */
+
+export const Clock = (p: IconProps) => (
+  <Base {...p}>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M12 7.5V12l3 1.8" />
+  </Base>
+);
+
+export const Rupee = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M7 4.5h10M7 9h10M15.5 4.5c0 3-2 4.5-5 4.5H7l8 10" />
+  </Base>
+);
+
+export const Box = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M4 8.2 12 4l8 4.2v7.6L12 20l-8-4.2V8.2Z" />
+    <path d="m4 8.2 8 4.2 8-4.2M12 12.4V20" />
+  </Base>
+);
+
+export const Calendar = (p: IconProps) => (
+  <Base {...p}>
+    <rect x="3.75" y="5.25" width="16.5" height="14" rx="2.25" />
+    <path d="M3.75 9.75h16.5M8.25 3.5v3.5M15.75 3.5v3.5" />
+  </Base>
+);
+
+export const Coin = (p: IconProps) => (
+  <Base {...p}>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M14.2 9.3c-.5-.7-1.3-1.1-2.2-1.1-1.3 0-2.2.7-2.2 1.7 0 2.3 4.6 1.1 4.6 3.5 0 1.1-1 1.8-2.4 1.8-1 0-1.9-.4-2.4-1.2M12 6.6v10.8" />
+  </Base>
+);
+
+export const Robot = (p: IconProps) => (
+  <Base {...p}>
+    <rect x="4.5" y="8" width="15" height="11" rx="2.5" />
+    <path d="M12 4.5V8M8.5 19v1.5M15.5 19v1.5M2.5 12.5v3M21.5 12.5v3" />
+    <circle cx="9.25" cy="12.75" r="1.15" />
+    <circle cx="14.75" cy="12.75" r="1.15" />
+  </Base>
+);
+
+export const Star = (p: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="size-5" {...p}>
+    <path d="m12 3.6 2.6 5.4 5.9.8-4.3 4.1 1.1 5.9L12 17l-5.3 2.8 1.1-5.9L3.5 9.8l5.9-.8L12 3.6Z" />
+  </svg>
+);
+
+export const Play = (p: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="size-5" {...p}>
+    <path d="M8.5 6.2v11.6a.7.7 0 0 0 1.06.6l9.2-5.8a.7.7 0 0 0 0-1.2l-9.2-5.8a.7.7 0 0 0-1.06.6Z" />
+  </svg>
+);
+
+export const ShieldCheck = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M12 3.2 5 6v5.4c0 4 2.9 7.6 7 9.4 4.1-1.8 7-5.4 7-9.4V6l-7-2.8Z" />
+    <path d="m9 12 2.2 2.2L15.3 10" />
+  </Base>
+);
+
+export const Menu = (p: IconProps) => (
+  <Base {...p} strokeWidth={1.8}>
+    <path d="M4 7h16M4 12h16M4 17h16" />
+  </Base>
+);
+
+export const Close = (p: IconProps) => (
+  <Base {...p} strokeWidth={1.8}>
+    <path d="M6 6l12 12M18 6L6 18" />
+  </Base>
+);
+
+export const Check = (p: IconProps) => (
+  <Base {...p} strokeWidth={2.4}>
+    <path d="m5 12.5 4.5 4.5L19 7" />
+  </Base>
+);
+
+export const Video = (p: IconProps) => (
+  <Base {...p}>
+    <rect x="2.5" y="6" width="13" height="12" rx="2.5" />
+    <path d="m15.5 10.5 6-3v9l-6-3v-3Z" />
+  </Base>
+);
+
+export const Globe = (p: IconProps) => (
+  <Base {...p}>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M3.5 12h17M12 3.5c2.2 2.4 3.3 5.3 3.3 8.5S14.2 18.1 12 20.5c-2.2-2.4-3.3-5.3-3.3-8.5S9.8 5.9 12 3.5Z" />
+  </Base>
+);
